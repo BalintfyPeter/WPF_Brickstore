@@ -16,25 +16,28 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Grid.Row="0">
-            <Label>Elemek száma:</Label>
-            <Label x:Name="lblElemekSzama"></Label>
-        </StackPanel>
+        <Button Grid.Column="0" Grid.Row="0" Content="Importálás" Click="Button_Click"/>
 
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <Label Grid.Column="1" Grid.Row="0">Elem Neve:</Label>
-            <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtElemNev"></TextBox>
+            <Label>Elemek száma:</Label>
+            <Label x:Name="lblElemekSzama">-</Label>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="0" >
+        <StackPanel Grid.Column="2" Grid.Row="0">
+            <Label>Elem Neve:</Label>
+            <TextBox x:Name="txtElemNev" TextChanged="txtElemNev_TextChanged" IsEnabled="False"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="0" >
             <Label>Elem ID:</Label>
-            <TextBox></TextBox>
+            <TextBox x:Name="txtElemId" TextChanged="txtElemId_TextChanged" IsEnabled="False"></TextBox>
         </StackPanel>
 
-        <DataGrid Grid.Column="0" Grid.Row="1"
-                  Grid.ColumnSpan="3">
+        <DataGrid x:Name="dgElemek" Grid.Column="0" Grid.Row="1"
+                  Grid.ColumnSpan="4">
         </DataGrid>
     </Grid>
 </Window>
