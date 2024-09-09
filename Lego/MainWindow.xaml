@@ -79,7 +79,9 @@
 
         <DataGrid x:Name="dgElemek"
                   Grid.Column="0" Grid.Row="1"
-                  Grid.ColumnSpan="4">
+                  Grid.ColumnSpan="4"
+                  AlternatingRowBackground="FloralWhite"
+                  AlternationCount="2">
         </DataGrid>
     </Grid>
 </Window>
