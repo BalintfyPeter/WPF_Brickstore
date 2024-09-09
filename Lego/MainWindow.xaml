@@ -19,24 +19,66 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" Grid.Row="0" Content="Importálás" Click="Button_Click"/>
+        <Button Grid.Column="0"  Grid.Row="0"
+                Content="Importálás" Width="100"
+                Height="50" Click="Button_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter
+                        Property="CornerRadius"
+                        Value="5">
+                    </Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
 
-        <StackPanel Grid.Column="1" Grid.Row="0">
+        <StackPanel
+            Grid.Column="1"
+            Grid.Row="0">
+            
             <Label>Elemek száma:</Label>
-            <Label x:Name="lblElemekSzama">-</Label>
+            <Label
+                x:Name="lblElemekSzama"
+                Content="-">
+            </Label>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="0">
-            <Label>Elem Neve:</Label>
-            <TextBox x:Name="txtElemNev" TextChanged="txtElemNev_TextChanged" IsEnabled="False"></TextBox>
+        <StackPanel
+            Grid.Column="2"
+            Grid.Row="0">
+            
+            <Label
+                Content="Elem Neve:">
+                
+            </Label>
+
+            <TextBox
+                x:Name="txtElemNev"
+                TextChanged="txtElemNev_TextChanged"
+                IsEnabled="False"
+                Margin="0 10 35 0"
+                Width="150">
+            </TextBox>
         </StackPanel>
 
-        <StackPanel Grid.Column="3" Grid.Row="0" >
-            <Label>Elem ID:</Label>
-            <TextBox x:Name="txtElemId" TextChanged="txtElemId_TextChanged" IsEnabled="False"></TextBox>
+        <StackPanel
+            Grid.Column="3"
+            Grid.Row="0">
+            
+            <Label
+                Content="Elem ID:">
+            </Label>
+
+            <TextBox x:Name="txtElemId"
+                     TextChanged="txtElemId_TextChanged"
+                     IsEnabled="False"
+                     Margin="0 10 35 0"
+                     Width="150">
+            </TextBox>
         </StackPanel>
 
-        <DataGrid x:Name="dgElemek" Grid.Column="0" Grid.Row="1"
+        <DataGrid x:Name="dgElemek"
+                  Grid.Column="0" Grid.Row="1"
                   Grid.ColumnSpan="4">
         </DataGrid>
     </Grid>
