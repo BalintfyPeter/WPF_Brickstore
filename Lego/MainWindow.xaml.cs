@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using System.IO;
 
 namespace Lego
 {
@@ -20,17 +21,19 @@ namespace Lego
     public partial class MainWindow : Window
     {
         ObservableCollection<Elem> elemek = new ObservableCollection<Elem>();
+        ObservableCollection<Elem> szurtElemek = new ObservableCollection<Elem>();
 
         public MainWindow()
         {
             InitializeComponent();
-            dgElemek.ItemsSource = elemek;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == true)
+            ofd.Filter = "BSX files (*.bsx)|*.bsx";
+
+            if (ofd.ShowDialog() == true && System.IO.Path.GetExtension(ofd.FileName) == ".bsx")
             {
                 XDocument xaml = XDocument.Load(ofd.FileName);
                 elemek.Clear();
@@ -40,24 +43,28 @@ namespace Lego
                 }
                 txtElemId.IsEnabled = true;
                 txtElemNev.IsEnabled = true;
+                txtElemNev.Clear();
+                txtElemId.Clear();
+                dgElemek.ItemsSource = elemek;
+                lblElemekSzama.Content = elemek.Count;
             }
-            lblElemekSzama.Content = elemek.Count;
         }
 
         private void txtElemNev_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchText = txtElemNev.Text;
-            List<Elem> filteredItems = elemek.Where(item => item.ItemName.StartsWith(searchText)).ToList();
-            dgElemek.ItemsSource = filteredItems;
-            lblElemekSzama.Content = filteredItems.Count;
+            Kereses();
         }
 
         private void txtElemId_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchText = txtElemId.Text;
-            List<Elem> filteredItems = elemek.Where(item => item.ItemID.StartsWith(searchText)).ToList();
-            dgElemek.ItemsSource = filteredItems;
-            lblElemekSzama.Content = filteredItems.Count;
+            Kereses();
+        }
+
+        private void Kereses()
+        {
+            szurtElemek = new ObservableCollection<Elem>(elemek.Where(item => item.ItemName.ToLower().StartsWith(txtElemNev.Text.ToLower()) && item.ItemID.ToLower().StartsWith(txtElemId.Text.ToLower())));
+            dgElemek.ItemsSource = szurtElemek;
+            lblElemekSzama.Content = szurtElemek.Count;
         }
     }
 }
